@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "End-to-End Testing/1.0.0": {
+        "runtime": {
+          "End-to-End Testing.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "End-to-End Testing/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
