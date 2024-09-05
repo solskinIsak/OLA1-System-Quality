@@ -8,13 +8,19 @@ public class ToDoListService
     private string _connectionString = "Data Source=C:\\Users\\marku\\Documents\\SOFTWARE BACHELOR\\1st Semester\\System Quality\\OLA1\\OLA1-SofQuality\\Data\\OlaDB.sqlite;Version=3;";
     //private string _connectionString = "Data Source=C:\\Users\\jcall\\Desktop\\testfag\\OLA1-System-Quality\\Data\\OlaDB.sqlite;Version=3;";
     //private string _connectionString = ">INDSÆT-ABSOLUTE-PATH-HELENA<;Version=3;";
+    private string _tableName;
+
+    public ToDoListService(string tableName = "Tasks")
+    {
+        _tableName = tableName;
+    }
 
     public void AddTask(Task task)
     {
         using (var connection = new SQLiteConnection(_connectionString))
         {
             connection.Open();
-            var command = new SQLiteCommand("INSERT INTO Tasks (Description, Category, Deadline, IsCompleted) VALUES (@Description, @Category, @Deadline, @IsCompleted)", connection);
+            var command = new SQLiteCommand($"INSERT INTO {_tableName} (Description, Category, Deadline, IsCompleted) VALUES (@Description, @Category, @Deadline, @IsCompleted)", connection);
             command.Parameters.AddWithValue("@Description", task.Description);
             command.Parameters.AddWithValue("@Category", task.Category);
             command.Parameters.AddWithValue("@Deadline", task.Deadline);
@@ -29,7 +35,7 @@ public class ToDoListService
         using (var connection = new SQLiteConnection(_connectionString))
         {
             connection.Open();
-            var command = new SQLiteCommand("UPDATE Tasks SET Description = @Description, Category = @Category, Deadline = @Deadline, IsCompleted = @IsCompleted WHERE Id = @Id", connection);
+            var command = new SQLiteCommand($"UPDATE {_tableName} SET Description = @Description, Category = @Category, Deadline = @Deadline, IsCompleted = @IsCompleted WHERE Id = @Id", connection);
             command.Parameters.AddWithValue("@Description", updatedTask.Description);
             command.Parameters.AddWithValue("@Category", updatedTask.Category);
             command.Parameters.AddWithValue("@Deadline", updatedTask.Deadline);
@@ -45,7 +51,7 @@ public class ToDoListService
         using (var connection = new SQLiteConnection(_connectionString))
         {
             connection.Open();
-            var command = new SQLiteCommand("DELETE FROM Tasks WHERE Id = @Id", connection);
+            var command = new SQLiteCommand($"DELETE FROM {_tableName} WHERE Id = @Id", connection);
             command.Parameters.AddWithValue("@Id", id);
             command.ExecuteNonQuery();
         }
@@ -57,7 +63,7 @@ public class ToDoListService
         using (var connection = new SQLiteConnection(_connectionString))
         {
             connection.Open();
-            var command = new SQLiteCommand("UPDATE Tasks SET IsCompleted = 1 WHERE Id = @Id", connection);
+            var command = new SQLiteCommand($"UPDATE {_tableName} SET IsCompleted = 1 WHERE Id = @Id", connection);
             command.Parameters.AddWithValue("@Id", id);
             command.ExecuteNonQuery();
         }
@@ -70,7 +76,7 @@ public class ToDoListService
         using (var connection = new SQLiteConnection(_connectionString))
         {
             connection.Open();
-            var command = new SQLiteCommand("SELECT * FROM Tasks", connection);
+            var command = new SQLiteCommand($"SELECT * FROM {_tableName}", connection);
             using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())
