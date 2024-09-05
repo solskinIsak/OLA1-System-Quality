@@ -48,16 +48,38 @@ public class Program
 
     public static Task AddTask()
     {
-        var task = new Task();
-        Console.Write("Enter task description: ");
-        task.Description = Console.ReadLine();
-        Console.Write("Enter task category: ");
-        task.Category = Console.ReadLine();
-        Console.Write("Enter task deadline (yyyy-mm-dd): ");
-        task.Deadline = DateTime.Parse(Console.ReadLine());
-        task.IsCompleted = false;
+            var task = new Task();
+        try
+        {
+            Console.Write("Enter task description: ");
+            task.Description = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(task.Description))
+            {
+                throw new ArgumentException("Description cannot be empty.");
+            }
+            
+            Console.Write("Enter task category: ");
+            task.Category = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(task.Category))
+            {
+                throw new ArgumentException("Category cannot be empty.");
+            }
+            
+            Console.Write("Enter task deadline (yyyy-mm-dd): ");
+            task.Deadline = DateTime.Parse(Console.ReadLine());
+            if (task.Deadline < DateTime.Now)
+            {
+                throw new ArgumentException("Deadline cannot be in the past.");
+            }
+            task.IsCompleted = false;
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
         return task;
     }
+
 
     public static void UpdateTask()
     {
