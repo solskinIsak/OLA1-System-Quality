@@ -21,7 +21,9 @@ public class Program
             switch (option)
             {
                 case "1":
-                    AddTask();
+                    Task task = AddTask();
+                    toDoListService.AddTask(task);
+                    Console.WriteLine("Task added successfully.");
                     break;
                 case "2":
                     UpdateTask();
@@ -44,7 +46,7 @@ public class Program
         }
     }
 
-    public static void AddTask()
+    public static Task AddTask()
     {
         var task = new Task();
         Console.Write("Enter task description: ");
@@ -54,8 +56,7 @@ public class Program
         Console.Write("Enter task deadline (yyyy-mm-dd): ");
         task.Deadline = DateTime.Parse(Console.ReadLine());
         task.IsCompleted = false;
-        toDoListService.AddTask(task);
-        Console.WriteLine("Task added successfully.");
+        return task;
     }
 
     public static void UpdateTask()

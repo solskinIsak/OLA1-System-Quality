@@ -5,7 +5,7 @@ namespace OLA1_SofQuality;
 public class ToDoListService
 {
     private ToDoList _toDoList = new ToDoList();
-    private string _connectionString = "Data Source=C:\\Users\\marku\\Documents\\SOFTWARE BACHELOR\\1st Semester\\System Quality\\OLA1\\OLA1-SofQuality\\OLA1_SofQualityApp\\Data\\OlaDB.sqlite;Version=3;";
+    private string _connectionString = "Data Source=C:\\Users\\jcall\\Desktop\\testfag\\OLA1-System-Quality\\Data\\OlaDB.sqlite;Version=3;";
     
 
     public void AddTask(Task task)
