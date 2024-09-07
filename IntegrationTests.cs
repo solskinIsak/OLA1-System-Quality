@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Threading;
 using Xunit;
 
 namespace OLA1_SofQuality
@@ -8,24 +9,43 @@ namespace OLA1_SofQuality
     public class IntegrationTests : IDisposable
     {
         private readonly ToDoListService _toDoListService;
-        //The data source needs to be set by the user copying the absolute path from the Data/OlaDB.sqlite file
-        private readonly string _connectionString = "Data Source=C:\\Users\\marku\\Documents\\SOFTWARE BACHELOR\\1st Semester\\System Quality\\OLA1\\OLA1-SofQuality\\Data\\OlaDB.sqlite;Version=3;";
+        private readonly SQLiteConnection _connection;
 
         public IntegrationTests()
         {
-            _toDoListService = new ToDoListService("TasksTest");
+            var connectionString = "Data Source=:memory:;Version=3;New=True;";
+            _connection = new SQLiteConnection(connectionString);
+            _connection.Open();
             InitializeDatabase();
+            _toDoListService = new ToDoListService(_connection, "TasksTest");
         }
 
         private void InitializeDatabase()
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var command = new SQLiteCommand(
+                       "CREATE TABLE IF NOT EXISTS TasksTest (" +
+                       "Id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                       "Description TEXT NOT NULL, " +
+                       "Category TEXT NOT NULL, " +
+                       "Deadline DATETIME NOT NULL, " +
+                       "IsCompleted BOOLEAN NOT NULL)", _connection))
             {
-                connection.Open();
-                var command = new SQLiteCommand(
-                    "CREATE TABLE IF NOT EXISTS TasksTest (Id INTEGER PRIMARY KEY AUTOINCREMENT, Description TEXT NOT NULL, Category TEXT NOT NULL, Deadline TEXT NOT NULL, IsCompleted INTEGER NOT NULL)",
-                    connection);
                 command.ExecuteNonQuery();
+            }
+            // Log table creation
+            using (var command = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type='table' AND name='TasksTest';", _connection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        Console.WriteLine("Table 'TasksTest' created successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failed to create table 'TasksTest'.");
+                    }
+                }
             }
         }
 
@@ -148,12 +168,11 @@ namespace OLA1_SofQuality
 
         public void Dispose()
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var command = new SQLiteCommand("DROP TABLE IF EXISTS TasksTest", _connection))
             {
-                connection.Open();
-                var command = new SQLiteCommand("DROP TABLE IF EXISTS TasksTest", connection);
                 command.ExecuteNonQuery();
             }
+            _connection.Close();
         }
     }
 }

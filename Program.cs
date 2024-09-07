@@ -1,11 +1,15 @@
+using System.Data.SQLite;
+
 namespace OLA1_SofQuality;
 
 public class Program
 {
-    private static ToDoListService toDoListService = new ToDoListService();
+    private static SQLiteConnection _connection = new SQLiteConnection("Data Source=C:\\Users\\marku\\Documents\\SOFTWARE BACHELOR\\1st Semester\\System Quality\\OLA1\\OLA1-SofQuality\\Data\\OlaDB.sqlite;Version=3;New=True;");
+    private static ToDoListService toDoListService = new ToDoListService(_connection, "Tasks");
 
     public static void Main(string[] args)
     {
+        _connection.Open();
         while (true)
         {
             Console.WriteLine("To-Do List Application");
@@ -38,6 +42,7 @@ public class Program
                     ViewTasks();
                     break;
                 case "6":
+                    _connection.Close();
                     return;
                 default:
                     Console.WriteLine("Invalid option. Please try again.");
@@ -48,7 +53,7 @@ public class Program
 
     public static Task AddTask()
     {
-            var task = new Task();
+        var task = new Task();
         try
         {
             Console.Write("Enter task description: ");
@@ -57,14 +62,14 @@ public class Program
             {
                 throw new ArgumentException("Description cannot be empty.");
             }
-            
+
             Console.Write("Enter task category: ");
             task.Category = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(task.Category))
             {
                 throw new ArgumentException("Category cannot be empty.");
             }
-            
+
             Console.Write("Enter task deadline (yyyy-mm-dd): ");
             task.Deadline = DateTime.Parse(Console.ReadLine());
             if (task.Deadline < DateTime.Now)
@@ -79,7 +84,6 @@ public class Program
         }
         return task;
     }
-
 
     public static void UpdateTask()
     {
