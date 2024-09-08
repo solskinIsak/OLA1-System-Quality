@@ -4,7 +4,7 @@ namespace OLA1_SofQuality;
 
 public class Program
 {
-    private static SQLiteConnection _connection = new SQLiteConnection("Data Source=C:\\Users\\marku\\Documents\\SOFTWARE BACHELOR\\1st Semester\\System Quality\\OLA1\\OLA1-SofQuality\\Data\\OlaDB.sqlite;Version=3;New=True;");
+    private static SQLiteConnection _connection = new SQLiteConnection("Data Source=C:\\Users\\jcall\\Desktop\\skole\\Software_Quality\\OLA1-System-Quality\\Data\\OlaDB.sqlite;Version=3;New=True;");
     private static ToDoListService toDoListService = new ToDoListService(_connection, "Tasks");
 
     public static void Main(string[] args)

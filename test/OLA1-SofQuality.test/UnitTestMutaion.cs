@@ -1,6 +1,6 @@
-namespace OLA1_SofQuality;
+namespace OLA1_SofQuality.test;
 
-public class UnitTests
+public class UnitTestMutaion
 {
 
     [Fact]
@@ -131,4 +131,5 @@ public class UnitTests
             Console.SetIn(originalInput);
         }
     }
+
 }
