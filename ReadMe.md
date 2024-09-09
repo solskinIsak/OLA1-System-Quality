@@ -64,79 +64,98 @@ through mutation testing, we aim to deliver a high-quality, reliable application
 
 ### Implementation of test strategy
 
-**5 unit tests:**
+#### 5 Unit Tests
 
-1. Add task
-- What are we testing?
-  We are testing the functionality of adding a task to the to-do list.
-- What should it do?
-  It should add a task to the to-do list.
-- What is the expected outcome?
-  The task should be added to the to-do list.
-- What is the actual outcome?
+We've implemented 5 different unit tests focusing on the Add Task functionality that all answer the 5 Questions Every Unit Test Must Answer:
 
-- How can the test be reproduced?
+#### AddTask\_ValidDescription\_TaskIsCreated
 
-2. Update task
-- What are we testing?
-  We are testing the functionality of updating a task in the to-do list.
-- What should it do?
-  It should update a task in the to-do list.
-- What is the expected outcome?
-  The task should be updated in the to-do list.
-- What is the actual outcome?
-- How can the test be reproduced?
+1. **What are we testing?**
+  - The creation of a `Task` with a valid description.
+2. **What should it do?**
+  - It should create a `Task` with the provided description.
+3. **What is the expected outcome?**
+  - The `Task` object should have the description "description".
+4. **What is the actual outcome?**
+  - The `Task` object has the description "description".
+5. **How can the test be reproduced?**
+  - By running the test with the input "description\r\ncategory\r\n\<dateTomorrow\>".
 
-3. Delete task
-- What are we testing?
-  We are testing the functionality of deleting a task from the to-do list.
-- What should it do?
-  It should delete a task from the to-do list.
-- What is the expected outcome?
-  The task should be deleted from the to-do list.
-- What is the actual outcome?
-- How can the test be reproduced?
+#### AddTask\_ValidCategory\_TaskIsCreated
 
-4. Mark tasks as completed
-- What are we testing?
-  We are testing the functionality of marking tasks as completed in the to-do list.
-- What should it do?
-  It should mark tasks as completed in the to-do list.
-- What is the expected outcome?
-  The tasks should be marked as completed in the to-do list.
-- What is the actual outcome?
-- How can the test be reproduced?
+1. **What are we testing?**
+  - The creation of a `Task` with a valid category.
+2. **What should it do?**
+  - It should create a `Task` with the provided category.
+3. **What is the expected outcome?**
+  - The `Task` object should have the category "category".
+4. **What is the actual outcome?**
+  - The `Task` object has the category "category".
+5. **How can the test be reproduced?**
+  - By running the test with the input "description\r\ncategory\r\n\<dateTomorrow\>".
 
-5. Set deadlines for tasks
-- What are we testing?
-  We are testing the functionality of setting deadlines for tasks in the to-do list.
-- What should it do?
-  It should set deadlines for tasks in the to-do list.
-- What is the expected outcome?
-  The deadline should be set for the task in the to-do list.
-- What is the actual outcome?
-- How can the test be reproduced?
+#### AddTask\_ValidDeadline\_TaskIsCreated
 
-**2 integration tests:**
+1. **What are we testing?**
+  - The creation of a `Task` with a valid deadline.
+2. **What should it do?**
+  - It should create a `Task` with the provided deadline.
+3. **What is the expected outcome?**
+  - The `Task` object should have the deadline "\<dateTomorrow\>".
+4. **What is the actual outcome?**
+  - The `Task` object has the deadline "\<dateTomorrow\>".
+5. **How can the test be reproduced?**
+  - By running the test with the input "description\r\ncategory\r\n\<dateTomorrow\>".
 
-1. Check Database Connection
+#### AddTask\_InvalidDateInput\_ThrowsFormatException
 
-- Purpose: Ensure that the application can successfully establish a connection to the database.
-- Description: This test verifies that when the application attempts to connect to the
-  database, the connection is successfully established. It ensures that the connection
-  string is correctly configured, the database server is reachable, and the database
-  itself is accessible. The test might simulate a connection request and verify that
-  the response from the database server confirms a successful connection.
+1. **What are we testing?**
+  - The creation of a `Task` with an invalid date input.
+2. **What should it do?**
+  - It should throw a `FormatException`.
+3. **What is the expected outcome?**
+  - A `FormatException` should be thrown.
+4. **What is the actual outcome?**
+  - A `FormatException` is thrown.
+5. **How can the test be reproduced?**
+  - By running the test with the input "description\r\ncategory\r\n\<invalidDate\>".
 
-2. Add Task to Database
+#### AddTask\_EmptyDescription\_ThrowsArgumentException
 
-- Purpose: Confirm that a task can be correctly added to the database and stored for future
-  retrieval.
-- Description: This test validates that when a new task is created in the application,
-  it is correctly added to the database. It checks that all relevant details (e.g.,
-  task title, description, deadline, status) are accurately stored in the appropriate
-  database table. After the task is added, the test retrieves the task from the database
-  to ensure that the data is stored correctly and matches what was initially provided.
+1. **What are we testing?**
+  - The creation of a `Task` with an empty description.
+2. **What should it do?**
+  - It should throw an `ArgumentException`.
+3. **What is the expected outcome?**
+  - An `ArgumentException` should be thrown.
+4. **What is the actual outcome?**
+  - An `ArgumentException` is thrown.
+5. **How can the test be reproduced?**
+  - By running the test with the input "\r\ncategory\r\n\<dateTomorrow\>".
+
+### 2 Integration Tests
+
+#### 1. AddTask\_TaskIsAdded
+
+**Purpose:** Confirm that a task can be correctly added to the database and stored for future retrieval.
+
+**Description:** This test validates that when a new task is created in the application, it is correctly added to the database. It checks that all relevant details (e.g., task description, category, deadline, and completion status) are accurately stored in the appropriate database table. After the task is added, the test retrieves the task from the database to ensure that the data is stored correctly and matches what was initially provided.
+
+**Success Criteria:**
+- The task is successfully added to the database.
+- The task details (description, category, deadline, and completion status) are correctly stored.
+- The task can be retrieved from the database with the same details as provided during creation.
+
+#### 2. UpdateTask\_TaskIsUpdated
+
+**Purpose:** Ensure that an existing task can be updated correctly in the database.
+
+**Description:** This test verifies that when an existing task is updated in the application, the changes are correctly reflected in the database. It checks that all relevant details (e.g., task description, category, deadline, and completion status) are accurately updated in the appropriate database table. After the task is updated, the test retrieves the task from the database to ensure that the data is updated correctly and matches the new details provided.
+
+**Success Criteria:**
+- The task is successfully updated in the database.
+- The updated task details (description, category, deadline, and completion status) are correctly stored.
+- The updated task can be retrieved from the database with the new details as provided during the update.
 
 **1 specification-based test:**
 
@@ -150,7 +169,8 @@ User CRUD operations:
 
 
 ### Test doubles
-
+When it comes to Test Doubles we used the following:
+We set up a ***InMemoryDatabase*** using ***SQLite*** for our tests, so we can test our database operations without having to connect to a real database. This is a form of a Test Double called a Fake Object as it is a simplified version of the real database.
 
 ### Mutation testing
 
