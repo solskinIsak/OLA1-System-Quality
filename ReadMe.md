@@ -173,7 +173,19 @@ When it comes to Test Doubles we used the following:
 We set up a ***InMemoryDatabase*** using ***SQLite*** for our tests, so we can test our database operations without having to connect to a real database. This is a form of a Test Double called a Fake Object as it is a simplified version of the real database.
 
 ### Mutation testing
+Mutation testing is a testing technique used to test the effectiveness of a test suite. Mutations are Small changes. That are introduced into the code. Examples include changing a + to -, or flipping a conditional operator.
 
+If at mutations survive the test suite, it indicates that the test suite is not robust enough to catch small errors in the code. 
+But if all mutations are killed, it indicates that the test suite is strong enough to catch small errors in the code.
+The goal is to have a high percentage of killed mutants, which indicates a robust test suite. Surviving mutants highlight areas where the tests may need improvement.
+
+Mutation tests are a good way to identify weak spots in the test suite, and allowing to improve the test suite the mutations have found holes in the test suite.
+
+In our project we tried to implement mutation testing with the stryker tool, but it kept failing. It gave us the following error message:
+```
+No project references found. Please add a project reference to your test project and retry
+```
+Even through multiple attempts to fix the error, thereby we sadly were not able to implement mutation testing in this project. 
 
 ### Verification and validation
 
