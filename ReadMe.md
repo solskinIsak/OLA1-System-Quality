@@ -57,10 +57,11 @@ Approach:
 
 
 #### Conclusion
-This test strategy, implemented using XUnit, ensures that our to-do list application
-is thoroughly tested at every level. By combining unit, integration, and
+By combining unit, integration, and
 specification-based testing with the strategic use of test doubles and validation
-through mutation testing, we aim to deliver a high-quality, reliable application that meets all user requirements.
+through mutation testing, we aimed to deliver a high-quality, reliable application that meets all user requirements.
+As you will read further down, we didnt succeeded in using the mutation testing, but our application is tested with unit, integration and specification-based testing.
+
 
 ### Implementation of test strategy
 
@@ -165,9 +166,6 @@ User CRUD operations:
   reflects these changes accordingly.
 
 
-### Test results
-
-
 ### Test doubles
 When it comes to Test Doubles we used the following:
 We set up a ***InMemoryDatabase*** using ***SQLite*** for our tests, so we can test our database operations without having to connect to a real database. This is a form of a Test Double called a Fake Object as it is a simplified version of the real database.
@@ -237,10 +235,12 @@ The internal software quality is usually something we always make sure is up to 
 The tests we made in this project were unit tests, integration tests, and specification-based tests.
 
 - **Unit Tests**:
-  The unit tests are used to test small parts of your codebase. We used this to test if our user could use various CRUD operations in our application, mark tasks as completed, and set deadlines for tasks. The unit tests could also be referred to as story tests since the tests are basically our 'acceptance criteria' for user stories.
+  The unit tests are used to test small parts of your codebase. We used this to test if our user could add task ( C Create from CRUD ) in our application. The unit tests could also be referred to as story tests since the tests are basically our 'acceptance criteria' for user stories.
+If we were to make a fully functional application, we would have made more unit tests to test the other CRUD operations.
 
 - **Integration Tests**:
   The integration tests are used to determine if individually developed units work correctly together, which is what we tested with our unit tests. We tested if the code could reach the database correctly.
 
 - **Specification-Based Tests**:
   The specification-based test could also be referred to as user-journey tests since they focus on how the user interacts with the system and follow a stream of individual tests.
+
