@@ -189,4 +189,58 @@ Even through multiple attempts to fix the error, thereby we sadly were not able 
 
 ### Verification and validation
 
+#### Verification:
+**Verification** is about evaluating software during development.
+
+#### Key Aspects of Verification:
+- **Focus**: Ensures that the software is developed according to the design and requirements.
+- **Activities**: Includes activities like code reviews, static code analysis, unit testing, and integration testing.
+- **Questions Addressed**:
+  - "Are we building the product right?"
+  - "Does the software meet the specified design and requirements?"
+- **Timing**: Performed during the development phase.
+- **Techniques**: Includes reviews, inspections, and various types of testing (e.g., unit testing, integration testing).
+
+#### Validation:
+**Validation** is about evaluating software at the end of development.
+
+#### Key Aspects of Validation:
+- **Focus**: Ensures that the software meets user needs and requirements.
+- **Activities**: Includes activities like system testing, acceptance testing, and user acceptance testing (UAT).
+- **Questions Addressed**:
+  - "Are we building the right product?"
+  - "Does the software meet the needs and expectations of the end-users?"
+- **Timing**: Performed after the development phase, typically during the testing phase and before deployment.
+- **Techniques**: Includes end-to-end testing, user acceptance testing, and system testing.
+
+
+**Verification** answers the question of whether the product was built correctly, while **Validation** answers the question of whether the right product was built. Both are essential for delivering high-quality software.
+
+In relation to **validation**, the user requirements were to make an application where the user can add, update, delete, and mark tasks as completed, categorize tasks into lists, and set deadlines for those tasks. Since this project was more of a 'show-that-you-know-how-to-test' and didn't need to be a fully functional application, we focused more on the testing part. If we were to make this application in real life, we would set up some user stories to ensure the validation part of the application was successful.
+
+In relation to the **verification** part, the answer is the same. We focused on whether the tests were working and made sure to have every one of the tests working as it should, instead of meeting the user requirements. And again, if we were to make it in real life, we would make sure that the code was up to standards and that it would be something to be proud of.
+
+
 ### Software quality reflection 
+
+There is two types of software quality: External and internal.
+
+- **External**: User experience, from the user interface to bugs.
+- **Internal**: Code, architecture, easy modification, and addition of features.
+
+Since, as said earlier, the project didn't need to be a fully functional application, we didn't work that much on the external part of software quality. The project didn't need a perfect user interface and such, but if we had to make a functional application, the user interface would be one of the most important steps to make. We would make sure that it was good-looking and easy to use. In relation to bugs, we wouldn't want to put something out that has bugs in it. We would rather have an incomplete application than send an application with bugs to the user.
+
+The internal software quality is usually something we always make sure is up to par. We always focus on having good architecture in our projects, and this is also something we made sure was good in this project. We focused on it being readable to our classmates and being easy to add new features if we had more time to do so.
+
+
+### Test Categories:
+The tests we made in this project were unit tests, integration tests, and specification-based tests.
+
+- **Unit Tests**:
+  The unit tests are used to test small parts of your codebase. We used this to test if our user could use various CRUD operations in our application, mark tasks as completed, and set deadlines for tasks. The unit tests could also be referred to as story tests since the tests are basically our 'acceptance criteria' for user stories.
+
+- **Integration Tests**:
+  The integration tests are used to determine if individually developed units work correctly together, which is what we tested with our unit tests. We tested if the code could reach the database correctly.
+
+- **Specification-Based Tests**:
+  The specification-based test could also be referred to as user-journey tests since they focus on how the user interacts with the system and follow a stream of individual tests.
