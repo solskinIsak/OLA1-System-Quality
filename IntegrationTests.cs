@@ -52,7 +52,7 @@ namespace OLA1_SofQuality
         [Fact]
         public void AddTask_TaskIsAdded()
         {
-            var task = new Task
+            var task = new SofQualityTask
             {
                 Description = "Test Task",
                 Category = "Test Category",
@@ -70,7 +70,7 @@ namespace OLA1_SofQuality
         [Fact]
         public void UpdateTask_TaskIsUpdated()
         {
-            var task = new Task
+            var task = new SofQualityTask
             {
                 Description = "Test Task",
                 Category = "Test Category",
@@ -82,7 +82,7 @@ namespace OLA1_SofQuality
             var tasks = _toDoListService.GetTasks();
             var taskId = tasks[0].Id;
 
-            var updatedTask = new Task
+            var updatedTask = new SofQualityTask
             {
                 Description = "Updated Task",
                 Category = "Updated Category",
@@ -100,7 +100,7 @@ namespace OLA1_SofQuality
         [Fact]
         public void DeleteTask_TaskIsDeleted()
         {
-            var task = new Task
+            var task = new SofQualityTask
             {
                 Description = "Test Task",
                 Category = "Test Category",
@@ -121,7 +121,7 @@ namespace OLA1_SofQuality
         [Fact]
         public void MarkTaskAsCompleted_TaskIsMarkedAsCompleted()
         {
-            var task = new Task
+            var task = new SofQualityTask
             {
                 Description = "Test Task",
                 Category = "Test Category",
@@ -143,7 +143,7 @@ namespace OLA1_SofQuality
         [Fact]
         public void GetTasks_ReturnsAllTasks()
         {
-            var task1 = new Task
+            var task1 = new SofQualityTask
             {
                 Description = "Test Task 1",
                 Category = "Test Category 1",
@@ -151,7 +151,7 @@ namespace OLA1_SofQuality
                 IsCompleted = false
             };
 
-            var task2 = new Task
+            var task2 = new SofQualityTask
             {
                 Description = "Test Task 2",
                 Category = "Test Category 2",

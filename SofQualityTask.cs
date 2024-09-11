@@ -1,6 +1,6 @@
 namespace OLA1_SofQuality;
 
-public class Task
+public class SofQualityTask
 {
     public int Id { get; set; }
     public string Description { get; set; }

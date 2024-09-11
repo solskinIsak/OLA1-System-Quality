@@ -2,22 +2,22 @@ namespace OLA1_SofQuality;
 
 public class ToDoList
 {
-    private List<Task> tasks = new List<Task>();
+    private List<SofQualityTask> tasks = new List<SofQualityTask>();
 
-    public void AddTask(Task task)
+    public void AddTask(SofQualityTask sofQualityTask)
     {
-        tasks.Add(task);
+        tasks.Add(sofQualityTask);
     }
 
-    public void UpdateTask(int id, Task updatedTask)
+    public void UpdateTask(int id, SofQualityTask updatedSofQualityTask)
     {
         var task = tasks.FirstOrDefault(t => t.Id == id);
         if (task != null)
         {
-            task.Description = updatedTask.Description;
-            task.Category = updatedTask.Category;
-            task.Deadline = updatedTask.Deadline;
-            task.IsCompleted = updatedTask.IsCompleted;
+            task.Description = updatedSofQualityTask.Description;
+            task.Category = updatedSofQualityTask.Category;
+            task.Deadline = updatedSofQualityTask.Deadline;
+            task.IsCompleted = updatedSofQualityTask.IsCompleted;
         }
     }
 
@@ -39,7 +39,7 @@ public class ToDoList
         }
     }
 
-    public List<Task> GetTasks()
+    public List<SofQualityTask> GetTasks()
     {
         return tasks;
     }

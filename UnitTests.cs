@@ -13,8 +13,8 @@ public class UnitTests
 
         try
         {
-            Task task = Program.AddTask();
-            Assert.Equal("description", task.Description);
+            SofQualityTask sofQualityTask = Program.AddTask();
+            Assert.Equal("description", sofQualityTask.Description);
         }
         finally
         {
@@ -32,8 +32,8 @@ public class UnitTests
 
         try
         {
-            Task task = Program.AddTask();
-            Assert.Equal("category", task.Category);
+            SofQualityTask sofQualityTask = Program.AddTask();
+            Assert.Equal("category", sofQualityTask.Category);
         }
         finally
         {
@@ -51,8 +51,8 @@ public class UnitTests
 
         try
         {
-            Task task = Program.AddTask();
-            Assert.Equal(DateTime.Parse(dateTomorrow), task.Deadline);
+            SofQualityTask sofQualityTask = Program.AddTask();
+            Assert.Equal(DateTime.Parse(dateTomorrow), sofQualityTask.Deadline);
         }
         finally
         {

@@ -25,8 +25,8 @@ public class Program
             switch (option)
             {
                 case "1":
-                    Task task = AddTask();
-                    toDoListService.AddTask(task);
+                    SofQualityTask sofQualityTask = AddTask();
+                    toDoListService.AddTask(sofQualityTask);
                     Console.WriteLine("Task added successfully.");
                     break;
                 case "2":
@@ -51,9 +51,9 @@ public class Program
         }
     }
 
-    public static Task AddTask()
+    public static SofQualityTask AddTask()
     {
-        var task = new Task();
+        var task = new SofQualityTask();
         try
         {
             Console.Write("Enter task description: ");
@@ -89,7 +89,7 @@ public class Program
     {
         Console.Write("Enter task ID to update: ");
         var id = int.Parse(Console.ReadLine());
-        var task = new Task();
+        var task = new SofQualityTask();
         Console.Write("Enter new task description: ");
         task.Description = Console.ReadLine();
         Console.Write("Enter new task category: ");
