@@ -15,28 +15,28 @@ namespace OLA1_SofQuality
             _tableName = tableName;
         }
 
-        public void AddTask(Task task)
+        public void AddTask(SofQualityTask sofQualityTask)
         {
             using (var command = new SQLiteCommand(
                 $"INSERT INTO {_tableName} (Description, Category, Deadline, IsCompleted) VALUES (@Description, @Category, @Deadline, @IsCompleted)", _connection))
             {
-                command.Parameters.AddWithValue("@Description", task.Description);
-                command.Parameters.AddWithValue("@Category", task.Category);
-                command.Parameters.AddWithValue("@Deadline", task.Deadline.ToString("o"));
-                command.Parameters.AddWithValue("@IsCompleted", task.IsCompleted ? 1 : 0);
+                command.Parameters.AddWithValue("@Description", sofQualityTask.Description);
+                command.Parameters.AddWithValue("@Category", sofQualityTask.Category);
+                command.Parameters.AddWithValue("@Deadline", sofQualityTask.Deadline.ToString("o"));
+                command.Parameters.AddWithValue("@IsCompleted", sofQualityTask.IsCompleted ? 1 : 0);
                 command.ExecuteNonQuery();
             }
         }
 
-        public void UpdateTask(int id, Task updatedTask)
+        public void UpdateTask(int id, SofQualityTask updatedSofQualityTask)
         {
             using (var command = new SQLiteCommand(
                 $"UPDATE {_tableName} SET Description = @Description, Category = @Category, Deadline = @Deadline, IsCompleted = @IsCompleted WHERE Id = @Id", _connection))
             {
-                command.Parameters.AddWithValue("@Description", updatedTask.Description);
-                command.Parameters.AddWithValue("@Category", updatedTask.Category);
-                command.Parameters.AddWithValue("@Deadline", updatedTask.Deadline.ToString("o"));
-                command.Parameters.AddWithValue("@IsCompleted", updatedTask.IsCompleted ? 1 : 0);
+                command.Parameters.AddWithValue("@Description", updatedSofQualityTask.Description);
+                command.Parameters.AddWithValue("@Category", updatedSofQualityTask.Category);
+                command.Parameters.AddWithValue("@Deadline", updatedSofQualityTask.Deadline.ToString("o"));
+                command.Parameters.AddWithValue("@IsCompleted", updatedSofQualityTask.IsCompleted ? 1 : 0);
                 command.Parameters.AddWithValue("@Id", id);
                 command.ExecuteNonQuery();
             }
@@ -60,16 +60,16 @@ namespace OLA1_SofQuality
             }
         }
 
-        public List<Task> GetTasks()
+        public List<SofQualityTask> GetTasks()
         {
-            var tasks = new List<Task>();
+            var tasks = new List<SofQualityTask>();
             using (var command = new SQLiteCommand($"SELECT * FROM {_tableName}", _connection))
             {
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        var task = new Task
+                        var task = new SofQualityTask
                         {
                             Id = reader.GetInt32(0),
                             Description = reader.GetString(1),
