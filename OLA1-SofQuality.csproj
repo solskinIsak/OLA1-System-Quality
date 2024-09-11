@@ -8,7 +8,9 @@
 
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <GenerateProgramFile>false</GenerateProgramFile> <!-- Add this line -->
+        <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     </PropertyGroup>
 
     <ItemGroup>
