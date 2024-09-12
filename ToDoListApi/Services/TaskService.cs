@@ -24,9 +24,10 @@ namespace OLA1_SofQuality.ToDoListApi.Services
             return await _taskRepository.GetTaskByIdAsync(id);
         }
 
-        public async Task AddTaskAsync(ToDoTask task)
+        public async Task<ToDoTask> AddTaskAsync(ToDoTask task)
         {
-            await _taskRepository.AddTaskAsync(task);
+            var addedTask = await _taskRepository.AddTaskAsync(task);
+            return addedTask;
         }
 
         public async Task<ToDoTask> UpdateTaskAsync(ToDoTask task)

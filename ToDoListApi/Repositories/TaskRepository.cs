@@ -18,7 +18,7 @@ namespace OLA1_SofQuality.ToDoListApi.Repositories
 
         public async Task<List<ToDoTask>> GetTasksAsync()
         {
-            return await _context.Tasks.Select(t => new ToDoTask
+            return await _context.ToDoTasks.Select(t => new ToDoTask
             {
                 Id = t.Id,
                 Description = t.Description,
@@ -30,7 +30,7 @@ namespace OLA1_SofQuality.ToDoListApi.Repositories
 
         public async Task<ToDoTask> GetTaskByIdAsync(int id)
         {
-            var task = await _context.Tasks.FindAsync(id);
+            var task = await _context.ToDoTasks.FindAsync(id);
             if (task == null) throw new Exception("Task not found");
 
             return new ToDoTask
@@ -43,24 +43,23 @@ namespace OLA1_SofQuality.ToDoListApi.Repositories
             };
         }
 
-        public async Task AddTaskAsync(ToDoTask task)
+        public async Task<ToDoTask> AddTaskAsync(ToDoTask task)
         {
-            var entity = new ToDoTask
-            {
-                Id = task.Id,
-                Description = task.Description,
-                Category = task.Category,
-                Deadline = task.Deadline,
-                IsCompleted = task.IsCompleted
-            };
-
-            await _context.Tasks.AddAsync(entity);
+            var response = await _context.ToDoTasks.AddAsync(task);
             await _context.SaveChangesAsync();
+            return new ToDoTask()
+            {
+                Id = response.Entity.Id,
+                Description = response.Entity.Description,
+                Category = response.Entity.Category,
+                Deadline = response.Entity.Deadline,
+                IsCompleted = response.Entity.IsCompleted
+            };
         }
 
         public async Task<ToDoTask> UpdateTaskAsync(ToDoTask task)
         {
-            var entity = await _context.Tasks.FindAsync(task.Id);
+            var entity = await _context.ToDoTasks.FindAsync(task.Id);
             if (entity == null) throw new Exception("Task not found");
 
             entity.Description = task.Description;
@@ -69,17 +68,17 @@ namespace OLA1_SofQuality.ToDoListApi.Repositories
             entity.IsCompleted = task.IsCompleted;
 
             
-           var response = _context.Tasks.Update(entity);
+           var response = _context.ToDoTasks.Update(entity);
             await _context.SaveChangesAsync();
             return response.Entity;
         }
 
         public async Task DeleteTaskAsync(int id)
         {
-            var task = await _context.Tasks.FindAsync(id);
+            var task = await _context.ToDoTasks.FindAsync(id);
             if (task != null) throw new Exception("Task not found");
             {
-                _context.Tasks.Remove(task);
+                _context.ToDoTasks.Remove(task);
                 await _context.SaveChangesAsync();
             }
         }

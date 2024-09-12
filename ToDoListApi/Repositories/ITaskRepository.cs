@@ -6,7 +6,7 @@ namespace OLA1_SofQuality.ToDoListApi.Repositories
     {
         Task<List<ToDoTask>> GetTasksAsync();
         Task<ToDoTask> GetTaskByIdAsync(int id);
-        Task AddTaskAsync(ToDoTask task);
+        Task<ToDoTask> AddTaskAsync(ToDoTask task);
         Task<ToDoTask> UpdateTaskAsync(ToDoTask task);
         Task DeleteTaskAsync(int id);
     }

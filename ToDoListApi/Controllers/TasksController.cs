@@ -3,6 +3,7 @@ using OLA1_SofQuality.ToDoListApi.Services;
 using OLA1_SofQuality.ToDoListApi.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace OLA1_SofQuality.ToDoListApi.Controllers
 {
@@ -36,10 +37,10 @@ namespace OLA1_SofQuality.ToDoListApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddTask(ToDoTask task)
+        public async Task<IActionResult> AddTask(ToDoTask task)
         {
-            await _taskService.AddTaskAsync(task);
-            return CreatedAtAction(nameof(GetTask), new { id = task.Id }, task);
+            var addedTask = await _taskService.AddTaskAsync(task);
+            return Ok(addedTask);
         }
 
         [HttpPut("{id}")]
